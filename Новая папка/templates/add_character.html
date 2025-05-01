@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Character{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Add Character</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.race.label(class="form-label") }}
+            {{ form.race(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.character_class.label(class="form-label") }}
+            {{ form.character_class(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.level.label(class="form-label") }}
+            {{ form.level(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.experience.label(class="form-label") }}
+            {{ form.experience(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.strength.label(class="form-label") }}
+            {{ form.strength(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.dexterity.label(class="form-label") }}
+            {{ form.dexterity(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.constitution.label(class="form-label") }}
+            {{ form.constitution(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.intelligence.label(class="form-label") }}
+            {{ form.intelligence(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.wisdom.label(class="form-label") }}
+            {{ form.wisdom(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.charisma.label(class="form-label") }}
+            {{ form.charisma(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.max_hp.label(class="form-label") }}
+            {{ form.max_hp(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.current_hp.label(class="form-label") }}
+            {{ form.current_hp(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.skills.label(class="form-label") }}
+            {{ form.skills(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.image.label(class="form-label") }}
+            {{ form.image(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Add Character</button>
+    </form>
+</div>
+{% endblock %}

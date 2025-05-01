@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ character.name }}{% endblock %}
+{% block content %}
+<h1>{{ character.name }}</h1>
+<p><strong>Race:</strong> {{ character.race }}</p>
+<p><strong>Class:</strong> {{ character.character_class }}</p>
+<p><strong>Level:</strong> {{ character.level }}</p>
+<p><strong>Experience Points:</strong> {{ character.experience }}</p>
+<h3>Attributes</h3>
+<ul>
+    <li><strong>Strength:</strong> {{ character.strength }}</li>
+    <li><strong>Dexterity:</strong> {{ character.dexterity }}</li>
+    <li><strong>Constitution:</strong> {{ character.constitution }}</li>
+    <li><strong>Intelligence:</strong> {{ character.intelligence }}</li>
+    <li><strong>Wisdom:</strong> {{ character.wisdom }}</li>
+    <li><strong>Charisma:</strong> {{ character.charisma }}</li>
+</ul>
+<p><strong>HP:</strong> {{ character.current_hp }} / {{ character.max_hp }}</p>
+<h3>Skills</h3>
+<p>{{ character.skills }}</p>
+{% if character.description %}
+<h3>Description</h3>
+<p>{{ character.description }}</p>
+{% endif %}
+<a href="{{ url_for('delete_character', id=character.id) }}" class="btn btn-danger">Delete</a>
+{% endblock %}

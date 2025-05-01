@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Character Collection{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">Character Collection</h1>
+    <div class="d-flex justify-content-end mb-3">
+        {% if current_user.is_authenticated and current_user.is_admin %}
+            <a href="{{ url_for('add_character') }}" class="btn btn-primary me-2">Add Character</a>
+            <a href="{{ url_for('generate_character') }}" class="btn btn-secondary">Generate Random Character</a>
+        {% endif %}
+    </div>
+    {% if characters %}
+        <div class="row">
+            {% for character in characters %}
+                <div class="col-md-4 mb-4">
+                    <div class="card text-white bg-dark h-100">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ character.name }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Race:</strong> {{ character.race }}</p>
+                            <p><strong>Class:</strong> {{ character.character_class }}</p>
+                            <p><strong>Level:</strong> {{ character.level }}</p>
+                            <p><strong>HP:</strong> {{ character.current_hp }} / {{ character.max_hp }}</p>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="{{ url_for('character_details', id=character.id) }}" class="btn btn-sm btn-light">Details</a>
+                            {% if current_user.is_authenticated and current_user.is_admin %}
+                                <a href="{{ url_for('delete_character', id=character.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted">No characters found. Add or generate some!</p>
+    {% endif %}
+</div>
+{% endblock %}
