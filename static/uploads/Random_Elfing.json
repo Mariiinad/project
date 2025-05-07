@@ -1,0 +1,18 @@
+{
+    "id": 6,
+    "name": "Random Elfing",
+    "race": "Elf12",
+    "character_class": "Rogue",
+    "level": 11,
+    "experience": 8373,
+    "strength": 14,
+    "dexterity": 12,
+    "constitution": 10,
+    "intelligence": 11,
+    "wisdom": 8,
+    "charisma": 18,
+    "max_hp": 71,
+    "current_hp": 31,
+    "skills": "Persuasion, Athletics, Persuasion",
+    "description": "Generated character with random attributes."
+}

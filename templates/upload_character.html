@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Upload Character</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="file" class="form-label">Upload JSON File</label>
+        <input type="file" class="form-control" id="file" name="file" accept=".json" required>
+    </div>
+    <button type="submit" class="btn btn-success">Upload</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

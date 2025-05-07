@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">{{ character.name }}</h1>
+
+<div class="text-center mb-4">
+    {% if character.image_path %}
+    <img src="{{ url_for('static', filename=character.image_path) }}" class="img-thumbnail" alt="{{ character.name }}" style="max-width: 300px;">
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Race:</strong> {{ character.race }}</p>
+        <p><strong>Class:</strong> {{ character.character_class }}</p>
+        <p><strong>Level:</strong> {{ character.level }}</p>
+        <p><strong>Experience:</strong> {{ character.experience }}</p>
+        <p><strong>Strength:</strong> {{ character.strength }}</p>
+        <p><strong>Dexterity:</strong> {{ character.dexterity }}</p>
+        <p><strong>Constitution:</strong> {{ character.constitution }}</p>
+        <p><strong>Intelligence:</strong> {{ character.intelligence }}</p>
+        <p><strong>Wisdom:</strong> {{ character.wisdom }}</p>
+        <p><strong>Charisma:</strong> {{ character.charisma }}</p>
+        <p><strong>Max HP:</strong> {{ character.max_hp }}</p>
+        <p><strong>Current HP:</strong> {{ character.current_hp }}</p>
+        <p><strong>Skills:</strong> {{ character.skills }}</p>
+        <p><strong>Description:</strong> {{ character.description }}</p>
+    </div>
+</div>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to List</a>
+{% endblock %}

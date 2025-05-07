@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title if title else "Flask App" }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Устанавливаем тёмный фон для всего сайта */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .navbar {
+            background-color: #1c1c1c;
+        }
+
+        .navbar a {
+            color: #e0e0e0;
+        }
+
+        .navbar a:hover {
+            color: #ffffff;
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /* Добавляем стили для флеш-сообщений */
+        .flash-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050;
+            padding: 15px;
+            border-radius: 5px;
+            color: white; /* Цвет текста */
+        }
+
+        .flash-success {
+            background-color: #198754; /* Зеленый фон для успешных сообщений */
+        }
+
+        .flash-danger {
+            background-color: #dc3545; /* Красный фон для ошибок */
+        }
+
+        .flash-info {
+            background-color: #0d6efd; /* Синий фон для информационных сообщений */
+        }
+
+        /* Стили для кнопок */
+        .btn {
+            background-color: #343a40;
+            color: #e0e0e0;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #495057;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Flask App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ current_user.username }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Автоматическое скрытие флеш-сообщений через 5 секунд
+        setTimeout(() => {
+            const flashContainer = document.getElementById('flash-container');
+            if (flashContainer) {
+                flashContainer.style.display = 'none';
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
