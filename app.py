@@ -67,7 +67,39 @@ class Character(db.Model):
 # Routes
 @app.route('/')
 def index():
-    characters = Character.query.all()
+    # Получаем параметры из запроса
+    name = request.args.get('name')
+    race = request.args.get('race')
+    character_class = request.args.get('character_class')
+    level = request.args.get('level', type=int)
+
+    # Параметры сортировки
+    sort_by = request.args.get('sort_by', 'name')  # По умолчанию сортировка по имени
+    order = request.args.get('order', 'asc')  # По умолчанию по возрастанию
+
+    # Начинаем с базового запроса
+    query = Character.query
+
+    # Применяем фильтры
+    if name:
+        query = query.filter(Character.name.ilike(f"%{name}%"))
+    if race:
+        query = query.filter(Character.race == race)
+    if character_class:
+        query = query.filter(Character.character_class == character_class)
+    if level:
+        query = query.filter(Character.level == level)
+
+    # Применяем сортировку
+    if sort_by == 'level':
+        query = query.order_by(Character.level.desc() if order == 'desc' else Character.level.asc())
+    elif sort_by == 'experience':
+        query = query.order_by(Character.experience.desc() if order == 'desc' else Character.experience.asc())
+    else:
+        query = query.order_by(Character.name.desc() if order == 'desc' else Character.name.asc())
+
+    # Выполняем запрос
+    characters = query.all()
     return render_template('index.html', characters=characters)
 
 
